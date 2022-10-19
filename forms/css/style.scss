@@ -1,0 +1,388 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+*,
+body,
+html,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: Poppins, sans-serif;
+}
+
+// Global Varibles
+//// Breakpoints
+$mobilePhoneSize: 400px;
+$tabletSize: 600px;
+$largeTabletSize: 720px;
+$smallLaptopSize: 900px;
+$laptopSize: 1200px;
+$largeScreenSize: 1400px;
+
+////colors
+////// solid
+$tint: #fe8d7c;
+//////gradient
+$gradientNav: linear-gradient(to right, #072142, #8c2b7a 42%, #dc143c);
+
+//mixin
+@mixin flex($justifyContent: flex-start, $alignItems: center, $flexDirection: row, $gap: 10px) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-direction: $flexDirection;
+  gap: $gap;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.btn {
+  border-radius: 12px;
+  padding: 0.625em 1.2em;
+  background-color: transparentize($tint, 0.9);
+  color: $tint;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.wrapper {
+  display: grid;
+  min-height: 100vh;
+  background-color: rgb(226, 226, 226);
+  isolation: isolate;
+  padding: 30px 10%;
+  place-items: center;
+
+  & > img {
+    width: 35%;
+    height: 100%;
+    left: 0;
+    top: 50%;
+    translate: 0 -50%;
+    object-fit: cover;
+    object-position: left;
+    position: absolute;
+    z-index: -1;
+
+    @media only screen and (max-width: $smallLaptopSize) {
+      display: none;
+    }
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    border-radius: 30px;
+
+    .copy {
+      width: 31.2%;
+      background-color: rgba(255, 255, 255, 0.267);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      color: white;
+
+      & > article {
+        @include flex(space-between, flex-start, column, 20px);
+
+        & > section {
+          h2 {
+            font-size: 20px;
+            font-weight: 300;
+          }
+        }
+        section {
+          @include flex($flexDirection: column, $gap: 16px);
+
+          article {
+            @include flex($flexDirection: column, $alignItems: flex-start, $gap: 5px);
+
+            i {
+              color: $tint;
+            }
+
+            h3 {
+              font-size: 16px;
+              font-weight: 400;
+            }
+
+            p {
+              font-weight: 300;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      header span {
+        color: white;
+        text-transform: uppercase;
+      }
+
+      @media only screen and (max-width: $smallLaptopSize) {
+        display: none;
+      }
+    }
+
+    .form {
+      flex: 1;
+      background-color: white;
+    }
+  }
+
+  .form {
+    padding: 40px;
+    @include flex($flexDirection: column, $gap: 20px);
+
+    header {
+      width: 100%;
+      font-size: 12px;
+      @include flex(flex-end, $gap: 10px);
+    }
+
+    section {
+      width: 100%;
+      height: 100%;
+      @include flex(center, center, column, 20px);
+
+      h1 {
+        text-align: center;
+        font-weight: 200;
+
+        &.login-success-text {
+          opacity: 0;
+          translate: 0px 30px;
+          animation: slideUp 0.5s ease-out forwards alternate 1.2s;
+        }
+      }
+
+      form {
+        width: 100%;
+        max-width: 360px;
+        @include flex(center, flex-start, column, 10px);
+
+        .form-group-inline {
+          width: 100%;
+          @include flex(space-between, center, row, 20px);
+
+          @media only screen and (max-width: $tabletSize) {
+            flex-direction: column;
+          }
+        }
+
+        .form-wrapper {
+          width: inherit;
+          @include flex($alignItems: flex-start, $flexDirection: column-reverse, $gap: 0px);
+
+          label {
+            font-size: 10px;
+            font-weight: 600;
+            transition: color 200ms ease-out;
+            color: rgb(167, 167, 167);
+          }
+
+          input,
+          select {
+            font-family: inherit;
+            width: 100%;
+            border-radius: 8px;
+            outline: 2px solid rgb(167, 167, 167);
+            padding: 0.625rem;
+            border: none;
+            font-size: 10px;
+            font-weight: 600;
+            transition: outline 200ms ease-out;
+            caret-color: $tint;
+
+            &:focus,
+            &:valid {
+              outline-color: $tint;
+              & + label {
+                color: $tint;
+              }
+            }
+          }
+
+          &.gender-select {
+            label {
+              display: inline-block;
+              margin-bottom: 8px;
+              width: 100%;
+              text-align: center;
+            }
+
+            .selects {
+              display: flex;
+              justify-content: center;
+              gap: 20px;
+              width: 100%;
+
+              input {
+                display: none;
+              }
+
+              label {
+                display: grid;
+                grid-template-rows: 70% 30%;
+                padding: 5px;
+                place-items: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                cursor: pointer;
+                outline: 2px solid rgb(167, 167, 167);
+                transition: background-color 300ms ease-out, outline 300ms ease-out;
+
+                i {
+                  font-size: 18px;
+                  color: lighten($color: black, $amount: 50%);
+                  transition: color 300ms ease-out;
+                }
+
+                span {
+                  font-size: 8px;
+                  transition: color 300ms ease-out;
+                  text-align: center;
+                }
+
+                &:hover {
+                  background-color: transparentize($color: $tint, $amount: 0.95);
+                }
+
+                &:has(input:checked) {
+                  outline: 2px solid $tint;
+                  background-color: transparentize($color: $tint, $amount: 0.8);
+
+                  i,
+                  span {
+                    color: $tint;
+                  }
+                }
+              }
+            }
+          }
+        }
+        button {
+          display: inline-block;
+          margin-top: 12px;
+          width: 100%;
+          padding: 1em;
+          color: white;
+          background-color: $tint;
+          border-radius: 10px;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0px 10px 20px #fe8d7ca8;
+        }
+      }
+
+      svg {
+        width: 200px;
+        height: 200px;
+
+        circle,
+        path {
+          stroke: $tint;
+        }
+
+        circle {
+          stroke-dasharray: 608.4810791015625;
+          stroke-dashoffset: 608.4810791015625;
+          animation: circle 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards 0.5s;
+        }
+        path {
+          stroke-dasharray: 156.24545288085938;
+          stroke-dashoffset: 156.24545288085938;
+          animation: path 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards 1s;
+        }
+
+        @keyframes circle {
+          from {
+            stroke-dashoffset: 608.4810791015625;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        @keyframes path {
+          from {
+            stroke-dashoffset: 156.24545288085938;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+      }
+    }
+    footer {
+      article {
+        max-width: 260px;
+        padding: 8px 36px;
+        opacity: 0;
+        translate: 0px 30px;
+        animation: slideUp 0.5s ease-out forwards 1.5s;
+
+        @include flex($alignItems: center, $gap: 12px);
+        border-radius: 10px;
+        background-color: transparentize($color: $tint, $amount: 0.9);
+
+        i {
+          color: $tint;
+          font-size: 24px;
+        }
+
+        & > div {
+          @include flex($alignItems: flex-start, $flexDirection: column, $gap: 0px);
+
+          h4 {
+            font-weight: bold;
+            font-size: 12px;
+          }
+
+          p {
+            font-weight: 300;
+            font-size: 9px;
+          }
+        }
+      }
+    }
+
+    @media only screen and (max-width: $tabletSize) {
+      padding: 20px;
+    }
+  }
+
+  @media only screen and (max-width: $smallLaptopSize) {
+    padding: 20px;
+  }
+}
+
+.tap {
+  transition: all 300ms ease-out;
+  &:hover {
+    scale: 1.01;
+  }
+  &:active {
+    scale: 0.98;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    translate: 0px 30px;
+  }
+  to {
+    opacity: 1;
+    translate: 0px 0px;
+  }
+}
