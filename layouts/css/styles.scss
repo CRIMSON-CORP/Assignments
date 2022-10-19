@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Big+Shoulders+Display:wght@700&display=swap");
+
+*,
+html,
+body,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+//Colors
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 0%, 0%);
+$lightGrey: hsla(0, 0%, 100%, 0.75);
+$flexWrapperBackground: hsl(0, 0%, 95%);
+$gridWrapperBackground: #1a1c28;
+$offWhite: $flexWrapperBackground;
+
+//cards
+$firstCard: hsl(31, 77%, 52%);
+$secondCard: hsl(184, 100%, 22%);
+$thirdCard: hsl(179, 100%, 13%);
+
+//fonts
+$headerFont: "Big Shoulders Display", cursive;
+$bodyFont: "Lexend Deca", sans-serif;
+
+//grid areas
+$orange: #eb5020;
+$yellow: #ffa401;
+$green: #05aa42;
+$blue: #01aefd;
+
+h2 {
+  font-family: $headerFont;
+}
+
+p,
+button {
+  font-family: $bodyFont;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+
+  &.flex {
+    background-color: $flexWrapperBackground;
+  }
+  &.grid {
+    background-color: $gridWrapperBackground;
+  }
+
+  .cards-container {
+    display: flex;
+
+    .card {
+      width: 100%;
+      max-width: 235px;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: $white;
+      padding: 36px;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .icon {
+          width: 50px;
+        }
+
+        h2 {
+          font-weight: normal;
+          letter-spacing: 1px;
+          font-size: 26px;
+          color: $offWhite;
+        }
+
+        p {
+          font-size: 11px;
+          line-height: 1.8;
+          font-weight: 300;
+          letter-spacing: 0.2px;
+          color: $lightGrey;
+        }
+      }
+
+      .cta {
+        button {
+          border-radius: 9999px;
+          padding: 0.8em 1.8em;
+          border: none;
+          font-size: 12px;
+          text-transform: capitalize;
+          background-color: $offWhite;
+          border: 2px solid $offWhite;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 300ms ease-out;
+
+          &:hover {
+            scale: 1.02;
+            background-color: transparent;
+            color: $offWhite;
+          }
+          &:active {
+            scale: 0.98;
+          }
+        }
+      }
+
+      &:first-child {
+        background-color: $firstCard;
+        border-radius: 5px 0px 0px 5px;
+
+        button {
+          color: $firstCard;
+        }
+
+        @media (max-width: 700px) {
+          border-radius: 5px 5px 0px 0px;
+        }
+      }
+      &:nth-child(2) {
+        background-color: $secondCard;
+
+        button {
+          color: $secondCard;
+        }
+      }
+
+      &:last-child {
+        border-radius: 0px 5px 5px 0px;
+        background-color: $thirdCard;
+
+        button {
+          color: $thirdCard;
+        }
+
+        @media (max-width: 700px) {
+          border-radius: 0px 0px 5px 5px;
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      flex-direction: column;
+    }
+  }
+
+  .grid-container {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1/0.7;
+    display: grid;
+    gap: clamp(5px, 2vw, 12px);
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+    .orange {
+      background-color: $orange;
+      grid-column: 1 / span 4;
+      grid-row: 1 / span 2;
+    }
+    .yellow {
+      background-color: $yellow;
+      grid-column: 5 / span 2;
+      grid-row: 1 / span 2;
+    }
+    .green {
+      background-color: $green;
+      grid-column: 1 / span 3;
+      grid-row: 3 / span 2;
+    }
+    .blue {
+      background-color: $blue;
+      grid-column: 4 / span 3;
+
+      &:first-child {
+        grid-row: 3 / span 1;
+      }
+      &:last-child {
+        grid-row: 4 / span 1;
+      }
+    }
+  }
+}
+
+.navigator {
+  display: inline-block;
+  position: fixed;
+  bottom: 1rem;
+  color: white;
+  padding: 6px 10px;
+  font-family: Poppins, sans-serif;
+  background-color: #f08665;
+  border-radius: 12px;
+  border: 2px solid white;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  text-decoration: none;
+
+  &.right {
+    right: 1rem;
+  }
+  &.left {
+    left: 1rem;
+  }
+}
